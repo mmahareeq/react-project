@@ -5,9 +5,88 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color:  rgb(240, 59, 231);
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+h1,
+h2,
+h3,
+h4 {
+  letter-spacing: 0.1rem;
+  text-transform: capitalize;
+  line-height: 1.25;
+  margin-bottom: 0.75rem;
+}
+h1 {
+  font-size: 3rem;
+}
+h2 {
+  font-size: 2rem;
+}
+h3 {
+  font-size: 1.25rem;
+}
+h4 {
+  font-size: 0.875rem;
+}
+
+p {
+  margin-bottom: 1.25rem;
+  color: lightgray;
+}
+
+.person img {
+  width: 75px;
+  height: 75px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+}
+
+.person {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  align-items: center;
+}
+.App {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+section {
+  width: 90vw;
+  margin: 0 auto;
+  max-width: 800px;
+  background-color:white;
+}
+.container {
+  width: 90vw;
+  margin: 5rem 0;
+  max-width: 450px;
+  background: white;
+  border-radius:0.25rem;
+  padding: 1.5rem 2rem;
+  box-shadow:0 5px 15px rgba(0, 0, 0, 0.4) ;
+}
+
+.btn-clear
+{
+  background-color: violet;
+  font-weight: 200;
+  font-size: 25px;
+  height: 50px;
+  width: 150px;
+  border-radius:0.25rem;
+  font-family:source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  monospace;
+
+
 }
