@@ -1,27 +1,25 @@
-import React from 'react'
-import {useState ,useContext ,useEffect} from 'react';
+import React, { useState, useContext, useEffect } from 'react'
+
 import {useCallback} from 'react';
 const url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s='
-const contextd = React.createContext();
+ export const AppContext = React.createContext()
 
- const  AppContext =({children })=>{
-
-  const [loading,setloading] = useState(true);
-  const [searchco , setseacrchco] = useState('a');
-  const [cocktail , setcocktail] = useState([]);
-
-  const fetchdrink = useCallback(
-    async() => {
-      setloading(true)
-      try
-      {
-        const response = await fetch(`${url}${searchco}`)
+ export  function AppProvider  ({ children }) {
+    const [loading, setLoading] = useState(true)
+    const [searchTerm, setSearchTerm] = useState('a')
+    const [cocktails, setCocktails] = useState([])
+    const [theme, setTheme] = useState('dark');
+    const fetchDrinks = useCallback( async () => {
+      setLoading(true)
+      
+        const response = await fetch(`${url}${searchTerm}`)
         const data = await response.json()
         console.log(data);
-
-        const { drink } = data;
-        if (drink) {
-        const newCocktails = drink.map((item) => {
+        const {drinks} = data ;
+        if(drinks)
+        {
+          const newcocktail = drinks.map((item)=>
+          {
             const {
               idDrink,
               strDrink,
@@ -29,44 +27,25 @@ const contextd = React.createContext();
               strAlcoholic,
               strGlass,
             } = item
-
             return {
               id: idDrink,
               name: strDrink,
               image: strDrinkThumb,
               info: strAlcoholic,
               glass: strGlass,
-            }})
-          setcocktail(newCocktails)
-          }
-          else{
-            setcocktail([])
-          }
-          setloading(false)
+            }
+          })
+          setCocktails(newcocktail);
         }
-        catch (error) {
-          console.log(error)
-          setloading(false)
-        }
-      },[searchco]
-  )
-
-  useEffect(() => {
-    fetchdrink()
-    
-  }, [searchco,fetchdrink])
-
-
-
+      },[searchTerm])
+      useEffect(() => {
+        fetchDrinks()
+      }, [searchTerm,fetchDrinks])
     return (
-        <contextd.Provider  value={{ loading, cocktail, searchco, setseacrchco }}>
+        <AppContext.Provider
+          value={{ loading, cocktails, searchTerm, setSearchTerm ,fetchDrinks}}
+        >
           {children}
-        </contextd.Provider>
-    )
+        </AppContext.Provider>
+      )
 }
-
-export const  useGlobalContext =() =>
-{
-  return useContext(contextd)
-}
-export{contextd,AppContext}

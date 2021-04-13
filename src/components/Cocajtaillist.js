@@ -1,32 +1,22 @@
 import React from 'react'
 import Cocktail from './Cocktail.js'
 import Loading from './Loading.js'
-import { useGlobalContext} from '../Context'
 
+import {useContext} from 'react';
+import {AppContext} from '../Context';
 
 export default function Cocajtaillist() {
-
-  const { cocktail, loading } = useGlobalContext()
-
-    if(loading)
-    {
-         return <Loading />
-    }
-    if(cocktail.length < 1)
-     {
-         return(
-            <h2 className='section-title'>
-                no cocktails matched your search criteria
-            </h2>
-            )
-     }
-     
+  const themeContext = useContext(AppContext);
+  const coktail = themeContext.cocktails;
     return (
         <section className='section'>
-        <h2 className='section-title'>cocktails</h2>
+          {console.log(themeContext.cocktails)}
+        
         <div className='cocktails-center'>
-        {cocktail.map((item) => {
+          
+        {coktail.map((item) => {
             return <Cocktail key={item.id} {...item} />
+           //console.log(item)
           })}
         </div>
       </section>
